@@ -12,7 +12,6 @@ LOAD VariableName,
      Comments
 FROM
 [..\QVS_Source\Variable_Repo.csv]
-Where AppToUseIn = 'AE'
 (txt, utf8, embedded labels, delimiter is ',', msq);
 
 

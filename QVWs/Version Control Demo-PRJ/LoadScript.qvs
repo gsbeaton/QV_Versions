@@ -1,0 +1,24 @@
+﻿/*
+| -------------------------------------------------------------------
+|  Create Variables
+| -------------------------------------------------------------------
+| Loads data from the Variables repository and loops through to 
+| create a valid variable for each row of the repo.
+|
+*/
+Variables:
+LOAD VariableName, 
+     VariableValue, 
+     Comments
+FROM
+[..\QVS_Source\Variable_Repo.csv]
+(txt, utf8, embedded labels, delimiter is ',', msq);
+
+// create the variables for the application security.
+FOR i=0 to NumMax(NoOfRows('Variables'),0)-1;
+  LET TempVarName     = peek('VariableName',$(i),'Variables');
+  LET TempVarValue    = peek('VariableValue',$(i),'Variables');
+  SET $(TempVarName)  = $(TempVarValue);
+NEXT
+
+DROP Table Variables;
